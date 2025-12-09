@@ -99,6 +99,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:  # ADD THIS
+    sdk: flutter
 
   # State Management
   flutter_riverpod: ^2.4.9
@@ -122,4 +124,4 @@ dev_dependencies:
   riverpod_generator: ^2.3.9
   freezed: ^2.4.6
   json_serializable: ^6.7.1
-  
+

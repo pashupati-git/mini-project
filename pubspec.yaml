@@ -99,6 +99,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:  # Keep this
+    sdk: flutter
 
   # State Management
   flutter_riverpod: ^2.4.9
@@ -109,7 +111,7 @@ dependencies:
   json_annotation: ^4.8.1
 
   # UI
-  intl: ^0.18.1
+  intl: ^0.20.2  # CHANGE THIS from ^0.18.1 to ^0.20.2
   uuid: ^4.2.2
 
 dev_dependencies:
