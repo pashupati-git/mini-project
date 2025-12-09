@@ -14,15 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+Message _$MessageFromJson(Map<String, dynamic> json) {
+  return _Message.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Message {
   String get id => throw _privateConstructorUsedError;
   String get senderId => throw _privateConstructorUsedError;
-  String get chatId => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String get senderName => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
-  bool get isRead => throw _privateConstructorUsedError;
-  MessageType get type => throw _privateConstructorUsedError;
+  bool get isMe => throw _privateConstructorUsedError;
+
+  /// Serializes this Message to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -38,11 +44,10 @@ abstract class $MessageCopyWith<$Res> {
   $Res call(
       {String id,
       String senderId,
-      String chatId,
-      String content,
+      String senderName,
+      String text,
       DateTime timestamp,
-      bool isRead,
-      MessageType type});
+      bool isMe});
 }
 
 /// @nodoc
@@ -62,11 +67,10 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
   $Res call({
     Object? id = null,
     Object? senderId = null,
-    Object? chatId = null,
-    Object? content = null,
+    Object? senderName = null,
+    Object? text = null,
     Object? timestamp = null,
-    Object? isRead = null,
-    Object? type = null,
+    Object? isMe = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,26 +81,22 @@ class _$MessageCopyWithImpl<$Res, $Val extends Message>
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
-      chatId: null == chatId
-          ? _value.chatId
-          : chatId // ignore: cast_nullable_to_non_nullable
+      senderName: null == senderName
+          ? _value.senderName
+          : senderName // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
+      isMe: null == isMe
+          ? _value.isMe
+          : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as MessageType,
     ) as $Val);
   }
 }
@@ -111,11 +111,10 @@ abstract class _$$MessageImplCopyWith<$Res> implements $MessageCopyWith<$Res> {
   $Res call(
       {String id,
       String senderId,
-      String chatId,
-      String content,
+      String senderName,
+      String text,
       DateTime timestamp,
-      bool isRead,
-      MessageType type});
+      bool isMe});
 }
 
 /// @nodoc
@@ -133,11 +132,10 @@ class __$$MessageImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? senderId = null,
-    Object? chatId = null,
-    Object? content = null,
+    Object? senderName = null,
+    Object? text = null,
     Object? timestamp = null,
-    Object? isRead = null,
-    Object? type = null,
+    Object? isMe = null,
   }) {
     return _then(_$MessageImpl(
       id: null == id
@@ -148,62 +146,57 @@ class __$$MessageImplCopyWithImpl<$Res>
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
-      chatId: null == chatId
-          ? _value.chatId
-          : chatId // ignore: cast_nullable_to_non_nullable
+      senderName: null == senderName
+          ? _value.senderName
+          : senderName // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
+      isMe: null == isMe
+          ? _value.isMe
+          : isMe // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as MessageType,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$MessageImpl implements _Message {
   const _$MessageImpl(
       {required this.id,
       required this.senderId,
-      required this.chatId,
-      required this.content,
+      required this.senderName,
+      required this.text,
       required this.timestamp,
-      this.isRead = false,
-      this.type = MessageType.text});
+      this.isMe = false});
+
+  factory _$MessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MessageImplFromJson(json);
 
   @override
   final String id;
   @override
   final String senderId;
   @override
-  final String chatId;
+  final String senderName;
   @override
-  final String content;
+  final String text;
   @override
   final DateTime timestamp;
   @override
   @JsonKey()
-  final bool isRead;
-  @override
-  @JsonKey()
-  final MessageType type;
+  final bool isMe;
 
   @override
   String toString() {
-    return 'Message(id: $id, senderId: $senderId, chatId: $chatId, content: $content, timestamp: $timestamp, isRead: $isRead, type: $type)';
+    return 'Message(id: $id, senderId: $senderId, senderName: $senderName, text: $text, timestamp: $timestamp, isMe: $isMe)';
   }
 
   @override
@@ -214,17 +207,18 @@ class _$MessageImpl implements _Message {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.senderId, senderId) ||
                 other.senderId == senderId) &&
-            (identical(other.chatId, chatId) || other.chatId == chatId) &&
-            (identical(other.content, content) || other.content == content) &&
+            (identical(other.senderName, senderName) ||
+                other.senderName == senderName) &&
+            (identical(other.text, text) || other.text == text) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.isRead, isRead) || other.isRead == isRead) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.isMe, isMe) || other.isMe == isMe));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, senderId, chatId, content, timestamp, isRead, type);
+  int get hashCode =>
+      Object.hash(runtimeType, id, senderId, senderName, text, timestamp, isMe);
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.
@@ -233,32 +227,38 @@ class _$MessageImpl implements _Message {
   @pragma('vm:prefer-inline')
   _$$MessageImplCopyWith<_$MessageImpl> get copyWith =>
       __$$MessageImplCopyWithImpl<_$MessageImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MessageImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Message implements Message {
   const factory _Message(
       {required final String id,
       required final String senderId,
-      required final String chatId,
-      required final String content,
+      required final String senderName,
+      required final String text,
       required final DateTime timestamp,
-      final bool isRead,
-      final MessageType type}) = _$MessageImpl;
+      final bool isMe}) = _$MessageImpl;
+
+  factory _Message.fromJson(Map<String, dynamic> json) = _$MessageImpl.fromJson;
 
   @override
   String get id;
   @override
   String get senderId;
   @override
-  String get chatId;
+  String get senderName;
   @override
-  String get content;
+  String get text;
   @override
   DateTime get timestamp;
   @override
-  bool get isRead;
-  @override
-  MessageType get type;
+  bool get isMe;
 
   /// Create a copy of Message
   /// with the given fields replaced by the non-null parameter values.

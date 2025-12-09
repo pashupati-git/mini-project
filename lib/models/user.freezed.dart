@@ -14,13 +14,17 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+User _$UserFromJson(Map<String, dynamic> json) {
+  return _User.fromJson(json);
+}
+
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get avatarUrl => throw _privateConstructorUsedError;
-  bool get isOnline => throw _privateConstructorUsedError;
-  DateTime? get lastSeen => throw _privateConstructorUsedError;
+
+  /// Serializes this User to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -33,12 +37,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? avatarUrl,
-      bool isOnline,
-      DateTime? lastSeen});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -58,9 +57,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? avatarUrl = freezed,
-    Object? isOnline = null,
-    Object? lastSeen = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,18 +67,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isOnline: null == isOnline
-          ? _value.isOnline
-          : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lastSeen: freezed == lastSeen
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -94,12 +78,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? avatarUrl,
-      bool isOnline,
-      DateTime? lastSeen});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -116,9 +95,6 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? avatarUrl = freezed,
-    Object? isOnline = null,
-    Object? lastSeen = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -129,47 +105,26 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      avatarUrl: freezed == avatarUrl
-          ? _value.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isOnline: null == isOnline
-          ? _value.isOnline
-          : isOnline // ignore: cast_nullable_to_non_nullable
-              as bool,
-      lastSeen: freezed == lastSeen
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl(
-      {required this.id,
-      required this.name,
-      this.avatarUrl,
-      this.isOnline = false,
-      this.lastSeen});
+  const _$UserImpl({required this.id, required this.name});
+
+  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserImplFromJson(json);
 
   @override
   final String id;
   @override
   final String name;
-  @override
-  final String? avatarUrl;
-  @override
-  @JsonKey()
-  final bool isOnline;
-  @override
-  final DateTime? lastSeen;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, avatarUrl: $avatarUrl, isOnline: $isOnline, lastSeen: $lastSeen)';
+    return 'User(id: $id, name: $name)';
   }
 
   @override
@@ -178,18 +133,12 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl) &&
-            (identical(other.isOnline, isOnline) ||
-                other.isOnline == isOnline) &&
-            (identical(other.lastSeen, lastSeen) ||
-                other.lastSeen == lastSeen));
+            (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, avatarUrl, isOnline, lastSeen);
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -198,26 +147,25 @@ class _$UserImpl implements _User {
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _User implements User {
-  const factory _User(
-      {required final String id,
-      required final String name,
-      final String? avatarUrl,
-      final bool isOnline,
-      final DateTime? lastSeen}) = _$UserImpl;
+  const factory _User({required final String id, required final String name}) =
+      _$UserImpl;
+
+  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   String get id;
   @override
   String get name;
-  @override
-  String? get avatarUrl;
-  @override
-  bool get isOnline;
-  @override
-  DateTime? get lastSeen;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
