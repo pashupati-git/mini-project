@@ -1,13 +1,13 @@
+// ============================================================================
+// FILE 10: lib/main.dart
+// Copy this file into: lib/main.dart
+// ============================================================================
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'screens/chat_screen.dart';
+import 'views/language_selection_screen.dart';
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Zoto Chat',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const ChatScreen(),
+      title: 'ShopEase',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xFFFAFAFA),
+      ),
+      home: const LanguageSelectionScreen(),
     );
   }
 }
