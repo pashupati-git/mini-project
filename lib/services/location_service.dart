@@ -1,0 +1,93 @@
+import 'package:geolocator/geolocator.dart';
+import 'dart:async'; // Add this import for TimeoutException
+
+class LocationService {
+  Future<Position?> getCurrentLocation() async {
+    try {
+      // STEP 1: Check and request permissions FIRST
+      LocationPermission permission = await Geolocator.checkPermission();
+      print('📍 Initial permission status: $permission');
+
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        print('📍 Permission after request: $permission');
+
+        if (permission == LocationPermission.denied) {
+          throw Exception('Location permission denied. Please allow location access in settings.');
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        throw Exception('Location permissions are permanently denied. Please enable them in app settings.');
+      }
+
+      // STEP 2: Check if location services are enabled AFTER permissions
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      print('📍 Location service enabled: $serviceEnabled');
+
+      if (!serviceEnabled) {
+        throw Exception('Location services are disabled. Please enable location in your device settings.');
+      }
+
+      // STEP 3: Get current position with increased timeout
+      print('📍 Attempting to get current position...');
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+        timeLimit: const Duration(seconds: 15),
+      );
+
+      print('📍 Location retrieved: ${position.latitude}, ${position.longitude}');
+      return position;
+
+    } on LocationServiceDisabledException catch (e) {
+      print('❌ Location service disabled exception: $e');
+      throw Exception('Location services are disabled. Please enable location in your device settings.');
+    } on PermissionDeniedException catch (e) {
+      print('❌ Permission denied exception: $e');
+      throw Exception('Location permission denied. Please allow location access in settings.');
+    } on TimeoutException catch (e) {
+      print('❌ Timeout exception: $e');
+      throw Exception('Location request timed out. Please make sure GPS is enabled and try again.');
+    } catch (e) {
+      print('❌ Error getting location: $e');
+      rethrow;
+    }
+  }
+
+  // Check if location is available without throwing errors
+  Future<bool> isLocationAvailable() async {
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return false;
+      }
+
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      return serviceEnabled;
+    } catch (e) {
+      print('Error checking location availability: $e');
+      return false;
+    }
+  }
+
+  // Open device location settings
+  Future<void> openLocationSettings() async {
+    try {
+      await Geolocator.openLocationSettings();
+    } catch (e) {
+      print('Error opening location settings: $e');
+      throw Exception('Could not open location settings');
+    }
+  }
+
+  // Open app settings (for when permissions are denied forever)
+  Future<void> openAppSettings() async {
+    try {
+      await Geolocator.openAppSettings();
+    } catch (e) {
+      print('Error opening app settings: $e');
+      throw Exception('Could not open app settings');
+    }
+  }
+}

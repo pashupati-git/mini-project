@@ -13,20 +13,17 @@ dependencies:
 
   # State Management
   flutter_riverpod: ^2.4.9
-  riverpod_annotation: ^2.3.3
+  permission_handler: ^11.3.1
+  geolocator: ^11.0.0
+  intl: ^0.20.2
 
-  # WebSocket & Network
-  web_socket_channel: ^2.4.0
+  # Network
   http: ^1.1.0
 
   # Code Generation
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
 
-  # UI & Utils
-  #intl: ^0.20.2
-  uuid: ^4.2.2
-  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -35,9 +32,6 @@ dev_dependencies:
 
   # Code Generation
   build_runner: ^2.4.7
-  riverpod_generator: ^2.3.9
-  freezed: ^2.4.6
-  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true

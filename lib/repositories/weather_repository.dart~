@@ -1,0 +1,9 @@
+import '../services/api_service.dart';
+import '../services/location_service.dart';
+
+class WeatherRepository{
+  final ApiService _apiService=ApiService();
+  final LocationService _locationService=LocationService();
+
+  Future<WeatherModel> get
+}

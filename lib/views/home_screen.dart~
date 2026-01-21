@@ -135,7 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: CircularProgressIndicator(color: Colors.white),
     );
   }
-
+  
   Widget _buildErrorState(String errorMessage) {
     final isLocationError = errorMessage.toLowerCase().contains('location');
     final isPermissionError = errorMessage.toLowerCase().contains('permission');
